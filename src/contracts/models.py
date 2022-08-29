@@ -1,3 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+from clients.models import Client
+
+
+class Contract(models.Model):
+    client = models.ForeignKey(to=Client, on_delete=models.CASCADE)
+    sales_contact = models.ForeignKey(to=get_user_model(), on_delete=models.SET_NULL)
+    status = models.ForeignKey(to=Status, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField
+    amount = models.FloatField
+    payment_due = models.DateTimeField
