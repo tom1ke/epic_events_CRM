@@ -10,6 +10,9 @@ class Contract(models.Model):
     sales_contact = models.ForeignKey(to=get_user_model(), on_delete=models.SET_NULL)
     status = models.ForeignKey(to=Status, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField
+    date_updated = models.DateTimeField(null=True)
     amount = models.FloatField
     payment_due = models.DateTimeField
+
+    def __str__(self):
+        return self.client.company_name
