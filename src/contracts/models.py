@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from clients.models import Client
+from status.models import Status
 
 
 class Contract(models.Model):
