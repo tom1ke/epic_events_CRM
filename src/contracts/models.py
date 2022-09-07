@@ -7,7 +7,7 @@ class Contract(models.Model):
     sales_contact = models.ForeignKey(to=get_user_model(), on_delete=models.CASCADE)
     status = models.ForeignKey('status.Status', on_delete=models.CASCADE, related_name='contract_status')
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(null=True)
+    date_updated = models.DateTimeField(auto_now=True)
     amount = models.FloatField
     payment_due = models.DateTimeField
 
