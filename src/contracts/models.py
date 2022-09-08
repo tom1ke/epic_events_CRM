@@ -12,4 +12,4 @@ class Contract(models.Model):
     payment_due = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return self.client
+        return f'{self.client.email} - {self.amount}€'

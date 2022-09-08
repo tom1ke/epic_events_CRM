@@ -13,4 +13,4 @@ class Event(models.Model):
     notes = models.TextField(max_length=2500)
 
     def __str__(self):
-        return self.client
+        return f'{self.client.email} - {self.event_date}'
