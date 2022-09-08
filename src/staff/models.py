@@ -26,15 +26,19 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    ADMIN = 1
+    SALES = 2
+    SUPPORT = 3
+    
     ROLE_CHOICES = [
-        ('ADMIN', 'ADMIN'),
-        ('SALES', 'SALES'),
-        ('SUPPORT', 'SUPPORT')
+        (ADMIN, 'Admin'),
+        (SALES, 'Sales'),
+        (SUPPORT, 'Support')
     ]
 
     username = None
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=25, choices=ROLE_CHOICES)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
