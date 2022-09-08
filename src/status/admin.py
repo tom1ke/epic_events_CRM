@@ -1,3 +1,15 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Status
+
+
+class StatusAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'contract',
+        'event',
+        'active'
+    )
+
+
+admin.site.register(Status, StatusAdmin)
