@@ -13,3 +13,9 @@ class UserAdmin(DjangoUserAdmin):
     )
     
     ordering = ('email',)
+    exclude = ('username',)
+    fieldsets = (
+        ('Personal info', {'fields': ('email', 'password', 'role')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+    )
