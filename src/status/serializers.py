@@ -8,7 +8,5 @@ class StatusSerializer(ModelSerializer):
     class Meta:
         model = Status
         fields = [
-            'contract',
-            'event',
-            'active'
+            'label'
         ]

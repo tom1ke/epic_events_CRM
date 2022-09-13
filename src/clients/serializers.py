@@ -15,6 +15,7 @@ class ClientSerializer(ModelSerializer):
             'phone',
             'mobile',
             'company_name',
+            'signed',
             'date_created',
             'date_updated'
         ]

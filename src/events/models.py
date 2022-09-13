@@ -4,8 +4,8 @@ from django.contrib.auth import get_user_model
 
 class Event(models.Model):
     client = models.ForeignKey('clients.Client', on_delete=models.CASCADE)
-    support_contact = models.ForeignKey(to=get_user_model(), on_delete=models.CASCADE)
-    status = models.ForeignKey('status.Status', on_delete=models.CASCADE, related_name='event_status')
+    support_contact = models.ForeignKey(to=get_user_model(), on_delete=models.SET_NULL, null=True)
+    status = models.ForeignKey('status.Status', on_delete=models.SET_NULL, null=True, related_name='event_status')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     attendees = models.PositiveIntegerField(blank=True, null=True)

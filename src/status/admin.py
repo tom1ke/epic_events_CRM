@@ -6,9 +6,7 @@ from .models import Status
 class StatusAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'contract',
-        'event',
-        'active'
+        'label'
     )
 
 
