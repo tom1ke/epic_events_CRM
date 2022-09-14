@@ -1,11 +1,8 @@
-from rest_framework.permissions import BasePermission, SAFE_METHODS
+from rest_framework.permissions import BasePermission
 
 
 class StatusAccessPermission(BasePermission):
-    message = 'You are not assigned to the related contract'
+    message = 'You are not allowed to perform this action'
     
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated
-    
-    def has_object_permission(self, request, view, obj):
-        return True if request.method in SAFE_METHODS else obj.contract.sales_contact == request.user
+        return request.user.is_superuser
