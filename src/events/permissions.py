@@ -13,7 +13,7 @@ class EventAccessPermission(BasePermission):
         if request.method != 'POST' and request.user.role == 3:
             return True
         
-        if request.user.is_superuser:
+        if request.user.role == 1:
             return True
         
     def has_object_permission(self, request, view, obj):
@@ -26,5 +26,5 @@ class EventAccessPermission(BasePermission):
         if obj.client.sales_contact == request.user:
             return True
 
-        if request.user.is_superuser:
+        if request.user.role == 1:
             return True

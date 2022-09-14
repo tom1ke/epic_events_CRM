@@ -10,7 +10,7 @@ class ClientAccessPermission(BasePermission):
         if request.user.role == 2:
             return True
         
-        if request.user.is_superuser:
+        if request.user.role == 1:
             return True
     
     def has_object_permission(self, request, view, obj):
@@ -20,5 +20,5 @@ class ClientAccessPermission(BasePermission):
         if obj.sales_contact == request.user:
             return True
         
-        if request.user.is_superuser:
+        if request.user.role == 1:
             return True
