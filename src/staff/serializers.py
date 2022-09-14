@@ -9,8 +9,6 @@ class UserSerializer(ModelSerializer):
          model = User
          fields = [
              'email',
-             'role',
-             'date_created',
-             'date_updated'
+             'role'
         ]
  
