@@ -1,4 +1,4 @@
-from http import client
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Contract
@@ -6,7 +6,26 @@ from .serializers import ContractSerializer
 from .permissions import ContractAccessPermission
 
 
-class AllContractsViewSet(ModelViewSet):
+class CreateContractMixin:
+    
+    def create(self, request, *args, **kwargs):
+        contract_data = request.data
+        
+        new_contract = Contract.objects.create(
+            client_id = contract_data['client'],
+            amount = contract_data['amount'],
+            payment_due = contract_data['payment_due'],
+            sales_contact = self.request.user
+        )
+        
+        new_contract.save()
+        
+        serializer = ContractSerializer(new_contract)
+        
+        return Response(serializer.data)
+
+
+class AllContractsViewSet(CreateContractMixin, ModelViewSet):
     
     serializer_class = ContractSerializer
     permission_classes = [ContractAccessPermission]
@@ -15,7 +34,7 @@ class AllContractsViewSet(ModelViewSet):
         return Contract.objects.all()
 
 
-class ContractViewSet(ModelViewSet):
+class ContractViewSet(CreateContractMixin, ModelViewSet):
     
     serializer_class = ContractSerializer
     permission_classes = [ContractAccessPermission]
