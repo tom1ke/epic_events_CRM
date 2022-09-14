@@ -10,7 +10,7 @@ class ContractSerializer(ModelSerializer):
         fields = [
             'client',
             'sales_contact',
-            'active',
+            'signed',
             'amount',
             'payment_due',
             'date_created',

@@ -8,7 +8,7 @@ class ContractAdmin(admin.ModelAdmin):
         'id',
         'client',
         'sales_contact',
-        'active',
+        'signed',
         'amount',
         'payment_due',
         'date_created',

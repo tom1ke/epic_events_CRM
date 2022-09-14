@@ -13,7 +13,7 @@ class ClientAdmin(admin.ModelAdmin):
         'last_name',
         'phone',
         'mobile',
-        'signed',
+        'active',
         'date_created',
         'date_updated'
     )

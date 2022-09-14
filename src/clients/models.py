@@ -14,7 +14,7 @@ class Client(models.Model):
     phone = models.CharField(validators=[phone_regex], max_length=16)
     mobile = models.CharField(validators=[phone_regex], max_length=16)
     company_name = models.CharField(max_length=250)
-    signed = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     
