@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', TokenObtainPairView.as_view(), name='login'),
     path('refresh/', TokenRefreshView.as_view(), name='refresh'),
+    path(r'', include('staff.urls')),
     path(r'', include('clients.urls')),
     path(r'', include('contracts.urls')),
     path(r'', include('events.urls')),
