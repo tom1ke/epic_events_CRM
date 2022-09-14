@@ -9,7 +9,7 @@ class Contract(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     amount = models.FloatField(blank=True, null=True)
-    payment_due = models.DateTimeField(blank=True, null=True)
+    payment_due = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.client.email} - {self.amount}€'
