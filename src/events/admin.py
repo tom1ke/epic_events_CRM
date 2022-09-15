@@ -8,6 +8,7 @@ class EventAdmin(admin.ModelAdmin):
         'id',
         'client',
         'support_contact',
+        'contract',
         'status',
         'attendees',
         'event_date',

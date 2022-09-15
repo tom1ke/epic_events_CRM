@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 class Event(models.Model):
     client = models.ForeignKey('clients.Client', on_delete=models.CASCADE)
     support_contact = models.ForeignKey(to=get_user_model(), on_delete=models.SET_NULL, null=True)
+    contract = models.ForeignKey('contracts.Contract', on_delete=models.CASCADE, related_name='event_contract')
     status = models.ForeignKey('status.Status', on_delete=models.SET_NULL, null=True, related_name='event_status')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
