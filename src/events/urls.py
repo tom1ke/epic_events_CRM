@@ -1,18 +1,27 @@
+from cgitb import lookup
 from django.urls import path, include
 from rest_framework_nested import routers
 
-from .views import EventViewSet, AllEventsViewSet
-from clients.urls import clients
+from .views import EventViewSet
+from contracts.urls import contracts, client_contracts, user_client_contracts
 
 
-all_events = routers.SimpleRouter()
-all_events.register(r'events', AllEventsViewSet, basename='all-events')
+events = routers.SimpleRouter()
+events.register(r'events', EventViewSet, basename='events')
 
-client_events = routers.NestedSimpleRouter(clients, r'clients', lookup='clients')
-client_events.register(r'events', EventViewSet, basename='client-events')
+contract_events = routers.NestedSimpleRouter(contracts, r'contracts', lookup='contracts')
+contract_events.register(r'events', EventViewSet, basename='contract_events')
+
+client_contract_events = routers.NestedSimpleRouter(client_contracts, r'contracts', lookup='contracts')
+client_contract_events.register(r'events', EventViewSet, basename='client_contract_events')
+
+user_client_contract_events = routers.NestedSimpleRouter(user_client_contracts, r'contracts', lookup='contracts')
+user_client_contract_events.register(r'events', EventViewSet, basename='user_client_contract_events')
 
 
 urlpatterns = [
-    path(r'', include(all_events.urls)),
-    path(r'', include(client_events.urls)),
+    path(r'', include(events.urls)),
+    path(r'', include(contract_events.urls)),
+    path(r'', include(client_contract_events.urls)),
+    path(r'', include(user_client_contract_events.urls)),
 ]
