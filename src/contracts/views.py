@@ -6,7 +6,10 @@ from .serializers import ContractSerializer
 from .permissions import ContractAccessPermission
 
 
-class CreateContractMixin:
+class ContractViewSet(ModelViewSet):
+    
+    serializer_class = ContractSerializer
+    permission_classes = [ContractAccessPermission]
     
     def create(self, request, *args, **kwargs):
         contract_data = request.data
@@ -23,21 +26,10 @@ class CreateContractMixin:
         serializer = ContractSerializer(new_contract)
         
         return Response(serializer.data)
-
-
-class AllContractsViewSet(CreateContractMixin, ModelViewSet):
     
-    serializer_class = ContractSerializer
-    permission_classes = [ContractAccessPermission]
-    
-    def get_queryset(self):
-        return Contract.objects.all()
+    def get_queryset(self):        
+        if 'clients_pk' in self.kwargs:
+            return Contract.objects.filter(client=self.kwargs['clients_pk'])
 
-
-class ContractViewSet(CreateContractMixin, ModelViewSet):
-    
-    serializer_class = ContractSerializer
-    permission_classes = [ContractAccessPermission]
-    
-    def get_queryset(self):
-        return Contract.objects.filter(client=self.kwargs['clients_pk'])
+        else:
+            return Contract.objects.all()

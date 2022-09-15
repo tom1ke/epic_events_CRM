@@ -1,3 +1,4 @@
+from urllib import request
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -11,9 +12,6 @@ class ClientViewSet(ModelViewSet):
     serializer_class = ClientSerializer
     permission_classes = [ClientAccessPermission]
     
-    def get_queryset(self):
-        return Client.objects.all()
-    
     def create(self, request, *args, **kwargs):
         client_data = request.data
         
@@ -26,10 +24,16 @@ class ClientViewSet(ModelViewSet):
             company_name = client_data['company_name'],
             sales_contact = self.request.user
         )
-            
-        
+
         new_client.save()
         
         serializer = ClientSerializer(new_client)
         
         return Response(serializer.data)
+    
+    def get_queryset(self):
+        if 'staff_pk' in self.kwargs:
+            return Client.objects.filter(sales_contact=self.kwargs['staff_pk'])
+        
+        else:
+            return Client.objects.all()
