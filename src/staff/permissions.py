@@ -7,8 +7,5 @@ class UserAccessPermission(BasePermission):
         if request.method in SAFE_METHODS:
             return True
 
-        if request.user.is_superuser:
+        if request.user.role == 1:
             return True
-    
-    def has_object_permission(self, request, view, obj):
-        return request.user.role == 1
