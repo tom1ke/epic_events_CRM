@@ -4,10 +4,14 @@ from rest_framework_nested import routers
 
 from .views import EventViewSet
 from contracts.urls import contracts, client_contracts, user_client_contracts
+from staff.urls import staff
 
 
 events = routers.SimpleRouter()
 events.register(r'events', EventViewSet, basename='events')
+
+user_events = routers.NestedSimpleRouter(staff, r'staff', lookup='staff')
+user_events.register(r'events', EventViewSet, basename='user_events')
 
 contract_events = routers.NestedSimpleRouter(contracts, r'contracts', lookup='contracts')
 contract_events.register(r'events', EventViewSet, basename='contract_events')
@@ -21,6 +25,7 @@ user_client_contract_events.register(r'events', EventViewSet, basename='user_cli
 
 urlpatterns = [
     path(r'', include(events.urls)),
+    path(r'', include(user_events.urls)),
     path(r'', include(contract_events.urls)),
     path(r'', include(client_contract_events.urls)),
     path(r'', include(user_client_contract_events.urls)),

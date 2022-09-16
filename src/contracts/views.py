@@ -28,8 +28,11 @@ class ContractViewSet(ModelViewSet):
         return Response(serializer.data)
     
     def get_queryset(self):        
+        if 'staff_pk' in self.kwargs:
+            return Contract.objects.filter(sales_contact=self.kwargs['staff_pk'])
+        
         if 'clients_pk' in self.kwargs:
             return Contract.objects.filter(client=self.kwargs['clients_pk'])
-
+        
         else:
             return Contract.objects.all()

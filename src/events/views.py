@@ -31,6 +31,9 @@ class EventViewSet(ModelViewSet):
         return Response(serializer.data)
     
     def get_queryset(self):
+        if 'staff_pk' in self.kwargs:
+            return Event.objects.filter(support_contact=self.kwargs['staff_pk'])
+        
         if 'contracts_pk' in self.kwargs:
             return Event.objects.filter(contract=self.kwargs['contracts_pk'])
         
