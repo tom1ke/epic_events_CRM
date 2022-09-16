@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.core.validators import RegexValidator, EmailValidator
+from django.core.validators import RegexValidator
 
 
 phone_regex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
