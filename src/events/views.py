@@ -1,3 +1,5 @@
+from datetime import datetime
+from django.utils.timezone import make_aware
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -18,7 +20,7 @@ class EventViewSet(ModelViewSet):
             client_id = event_data['client'],
             contract_id = event_data['contract'],
             attendees = event_data['attendees'],
-            event_date = event_data['event_date'],
+            event_date = make_aware(datetime.fromisoformat(event_data['event_date'])),
             notes = event_data['notes'],
             support_contact = self.request.user,
             status_id = 1
